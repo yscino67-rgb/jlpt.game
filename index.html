@@ -104,14 +104,16 @@ button {
 
 <div id="wordPage">
   <div id="wordList" class="word-list"></div>
-  <button onclick="startGame()">게임하기</button>
+  <button onclick="startGame('meaning')">게임하기</button>
+  <button onclick="startGame('reading')">히라가나</button>
 </div>
 
 <div id="gamePage" class="hidden">
   <h1>짝 맞추기 게임</h1>
   <div id="info">시도 횟수: 0</div>
   <div class="grid" id="grid"></div>
-  <button onclick="startGame()">새 게임</button>
+
+  <button onclick="startGame('meaning')">새 게임</button>
   <button onclick="showWordPage()">단어장 보기</button>
 </div>
 
@@ -187,6 +189,7 @@ const wordList = document.getElementById("wordList");
 const grid = document.getElementById("grid");
 const info = document.getElementById("info");
 
+let wordStates = {};
 function showWordList() {
   wordList.innerHTML = "";
 
@@ -209,22 +212,43 @@ function showWordPage() {
   gamePage.classList.add("hidden");
 }
 
-function startGame() {
+function startGame(mode = "meaning") {
   wordPage.classList.add("hidden");
   gamePage.classList.remove("hidden");
 
-  selectedWords = [...words]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 6);
+selectedWords = words
+  .filter(word => wordStates[word.kanji] !== 3)
+  .sort(() => Math.random() - 0.5)
+  .slice(0, 6);
 
-  cards = [];
+ cards = [];
 
-  selectedWords.forEach((item, index) => {
-    cards.push({ text: item.kanji, pairId: index });
-    cards.push({ text: item.kr, pairId: index });
+selectedWords.forEach((item, index) => {
+
+  cards.push({
+    text: item.kanji,
+    pairId: index
   });
 
-  cards.sort(() => Math.random() - 0.5);
+  if (mode === "reading") {
+
+    cards.push({
+      text: item.hira,
+      pairId: index
+    });
+
+  } else {
+
+    cards.push({
+      text: item.kr,
+      pairId: index
+    });
+
+  }
+
+});
+
+cards.sort(() => Math.random() - 0.5);
 
   grid.innerHTML = "";
   firstCard = null;
@@ -259,6 +283,17 @@ function openCard(div, card) {
   secondCard = { div, card };
   tries++;
   info.textContent = "시도 횟수: " + tries;
+  if (tries >= 20) {
+
+  setTimeout(() => {
+
+
+    showWordPage();
+
+  }, 300);
+
+  return;
+}
 
   if (firstCard.card.pairId === secondCard.card.pairId) {
     firstCard.div.classList.add("matched");
