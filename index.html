@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JLPT 단어장 게임</title>
 
+
 <style>
 body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -95,6 +96,34 @@ button {
   color: white;
   pointer-events: none;
 }
+.word-item {
+  cursor: pointer;
+  user-select: none;
+}
+
+.state-green {
+  background: #8bc34a;
+}
+
+.state-blue {
+  background: #42a5f5;
+  color: white;
+}
+
+.state-red {
+  background: #ef5350;
+  color: white;
+}
+
+.state-green .word-hira,
+.state-green .word-kr,
+.state-blue .word-hira,
+.state-blue .word-kr,
+.state-red .word-hira,
+.state-red .word-kr {
+  color: inherit;
+}
+
 </style>
 </head>
 
@@ -206,6 +235,12 @@ function showWordList() {
     wordList.appendChild(div);
   });
 }
+
+function showWordPage() {
+  wordPage.classList.remove("hidden");
+  gamePage.classList.add("hidden");
+}
+
 
 function showWordPage() {
   wordPage.classList.remove("hidden");
