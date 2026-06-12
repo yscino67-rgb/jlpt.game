@@ -225,6 +225,12 @@ function showWordList() {
   words.forEach((word) => {
     const div = document.createElement("div");
     div.className = "word-item";
+    div.onclick = () => cycleColor(word.kanji, div);
+
+    const state = wordStates[word.kanji] || 0;
+    if (state === 1) div.classList.add("state-green");
+    if (state === 2) div.classList.add("state-blue");
+    if (state === 3) div.classList.add("state-red");
 
     div.innerHTML = `
       <div class="word-kanji">${word.kanji}</div>
@@ -234,6 +240,19 @@ function showWordList() {
 
     wordList.appendChild(div);
   });
+}
+
+function cycleColor(wordKey, div) {
+  const current = wordStates[wordKey] || 0;
+  const next = (current + 1) % 4;
+
+  wordStates[wordKey] = next;
+
+  div.classList.remove("state-green", "state-blue", "state-red");
+
+  if (next === 1) div.classList.add("state-green");
+  if (next === 2) div.classList.add("state-blue");
+  if (next === 3) div.classList.add("state-red");
 }
 
 function showWordPage() {
