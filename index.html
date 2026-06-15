@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JLPT 단어장 게임</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
 
 <style>
@@ -21,7 +23,7 @@ h1 {
 .hidden {
   display: none;
 }
-
+ 
 .word-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -129,7 +131,13 @@ button {
 
 <body>
 
-<h1>JLPT 단어장</h1>
+<h1>JLPT 학습장</h1>
+
+<div style="margin-bottom:20px;">
+
+  <button onclick="showWordPage()">단어장</button>
+  <button onclick="showGrammarPage()">문법장</button>
+</div>
 
 <div id="wordPage">
   <div id="wordList" class="word-list"></div>
@@ -137,13 +145,20 @@ button {
   <button onclick="startGame('reading')">히라가나</button>
 </div>
 
+
 <div id="gamePage" class="hidden">
   <h1>짝 맞추기 게임</h1>
   <div id="info">시도 횟수: 0</div>
   <div class="grid" id="grid"></div>
 
-  <button onclick="startGame('meaning')">새 게임</button>
+  <button onclick="startGame()">새 게임</button>
   <button onclick="showWordPage()">단어장 보기</button>
+</div>
+
+<div id="grammarPage" class="hidden">
+  <div id="grammarList" class="grammar-list"></div>
+  <button onclick="startGrammarGame()">순서 배열</button>
+
 </div>
 
 <script>
@@ -211,6 +226,7 @@ let lock = false;
 let tries = 0;
 let matchedCount = 0;
 let selectedWords = [];
+let currentMode = "meaning";
 
 const wordPage = document.getElementById("wordPage");
 const gamePage = document.getElementById("gamePage");
@@ -258,15 +274,50 @@ function cycleColor(wordKey, div) {
 function showWordPage() {
   wordPage.classList.remove("hidden");
   gamePage.classList.add("hidden");
+  grammarPage.classList.add("hidden");
 }
 
+const grammarPage = document.getElementById("grammarPage");
+const grammarDiv = document.getElementById("grammarList");
 
-function showWordPage() {
-  wordPage.classList.remove("hidden");
+function showGrammarPage() {
+  wordPage.classList.add("hidden");
   gamePage.classList.add("hidden");
+  grammarPage.classList.remove("hidden");
+  renderGrammar();
 }
 
-function startGame(mode = "meaning") {
+const grammarListData = [
+  {
+    grammar: "〜ておく",
+    meaning: "미리 ~해두다",
+    example: "宿題をしておく。"
+  },
+  {
+    grammar: "〜ばかり",
+    meaning: "막 ~했다",
+    example: "さっき食べたばかりだ。"
+  }
+];
+
+function renderGrammar() {
+  grammarDiv.innerHTML = "";
+
+  grammarListData.forEach((item) => {
+    const div = document.createElement("div");
+    div.className = "grammar-item";
+
+    div.innerHTML = `
+      <div class="grammar-title">${item.grammar}</div>
+      <div class="grammar-meaning">${item.meaning}</div>
+    `;
+
+    grammarDiv.appendChild(div);
+  });
+}
+
+function startGame(mode = currentMode) {
+  currentMode = mode;
   wordPage.classList.add("hidden");
   gamePage.classList.remove("hidden");
 
