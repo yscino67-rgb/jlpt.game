@@ -1,0 +1,333 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f4f4f4;
+  text-align: center;
+  padding: 15px;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+.hidden {
+  display: none;
+}
+
+table {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto 20px;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 15px;
+}
+
+th {
+  background: #333;
+  color: white;
+}
+
+button {
+  margin: 10px 4px;
+  font-size: 17px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #222;
+  color: white;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 390px;
+  margin: 0 auto;
+}
+
+.card {
+  height: 105px;
+  background: #333;
+  color: white;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+
+.card.open {
+  background: white;
+  color: #222;
+}
+
+.card.matched {
+  background: #4caf50;
+  color: white;
+  pointer-events: none;
+}
+.word-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-width: 430px;
+  margin: 0 auto 20px;
+}
+
+.word-item {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  cursor: pointer;
+  user-select: none;
+}
+
+.state-green .word-hira,
+.state-green .word-kr,
+.state-blue .word-hira,
+.state-blue .word-kr,
+.state-red .word-hira,
+.state-red .word-kr {
+  color: inherit;
+}
+
+.state-green {
+  background: #8bc34a;
+}
+
+.state-blue {
+  background: #42a5f5;
+  color: white;
+}
+
+.state-red {
+  background: #ef5350;
+  color: white;
+}
+
+.word-kanji {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.word-hira {
+  font-size: 15px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.word-kr {
+  font-size: 15px;
+  margin-top: 6px;
+}
+
+.grammar-list {
+  max-width: 430px;
+  margin: 0 auto 20px;
+}
+
+.grammar-item {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  cursor: pointer;
+  user-select: none;
+}
+
+.grammar-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.grammar-meaning {
+  font-size: 15px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.grammar-example {
+  font-size: 15px;
+  margin-top: 6px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f4f4f4;
+  text-align: center;
+  padding: 15px;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+.hidden {
+  display: none;
+}
+
+table {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto 20px;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 15px;
+}
+
+th {
+  background: #333;
+  color: white;
+}
+
+button {
+  margin: 10px 4px;
+  font-size: 17px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #222;
+  color: white;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 390px;
+  margin: 0 auto;
+}
+
+.card {
+  height: 105px;
+  background: #333;
+  color: white;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+
+.card.open {
+  background: white;
+  color: #222;
+}
+
+.card.matched {
+  background: #4caf50;
+  color: white;
+  pointer-events: none;
+}
+.word-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-width: 430px;
+  margin: 0 auto 20px;
+}
+
+.word-item {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  cursor: pointer;
+  user-select: none;
+}
+
+.state-green .word-hira,
+.state-green .word-kr,
+.state-blue .word-hira,
+.state-blue .word-kr,
+.state-red .word-hira,
+.state-red .word-kr {
+  color: inherit;
+}
+
+.state-green {
+  background: #8bc34a;
+}
+
+.state-blue {
+  background: #42a5f5;
+  color: white;
+}
+
+.state-red {
+  background: #ef5350;
+  color: white;
+}
+
+.word-kanji {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.word-hira {
+  font-size: 15px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.word-kr {
+  font-size: 15px;
+  margin-top: 6px;
+}
+
+.grammar-list {
+  max-width: 430px;
+  margin: 0 auto 20px;
+}
+
+.grammar-item {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  cursor: pointer;
+  user-select: none;
+}
+
+.grammar-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.grammar-meaning {
+  font-size: 15px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.grammar-example {
+  font-size: 15px;
+  margin-top: 6px;
+}
+
+.state-green,
+.state-blue,
+.state-red {
+  color: black;
+}
