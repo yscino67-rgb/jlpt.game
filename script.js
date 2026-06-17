@@ -81,10 +81,39 @@ function renderGrammar() {
     if (state === 2) div.classList.add("state-blue");
     if (state === 3) div.classList.add("state-red");
 
+   const randomExample =
+  item.examples[Math.floor(Math.random() * item.examples.length)];
+
+const examplesHtml = `
+  <div class="grammar-example">${randomExample.jp}</div>
+  <div class="grammar-example-kr">${randomExample.kr}</div>
+`;
+
     div.innerHTML = `
-      <div class="grammar-title">${item.grammar}</div>
-      <div class="grammar-meaning">${item.meaning}</div>
+      <div class="grammar-top">
+        <div>
+          <div class="grammar-title">${item.grammar}</div>
+          <div class="grammar-meaning">${item.meaning}</div>
+        </div>
+        <button class="arrow-btn">▼</button>
+      </div>
+
+      <div class="grammar-detail hidden">
+        <div class="grammar-title">${item.grammar}</div>
+        <div class="grammar-meaning">${item.meaning}</div>
+        <div class="grammar-form">(${item.form})</div>
+        ${examplesHtml}
+      </div>
     `;
+
+    const arrowBtn = div.querySelector(".arrow-btn");
+    const detail = div.querySelector(".grammar-detail");
+
+    arrowBtn.onclick = (e) => {
+      e.stopPropagation();
+      detail.classList.toggle("hidden");
+      arrowBtn.textContent = detail.classList.contains("hidden") ? "▼" : "▲";
+    };
 
     grammarDiv.appendChild(div);
   });
