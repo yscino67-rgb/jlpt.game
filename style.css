@@ -331,3 +331,49 @@ button {
 .state-red {
   color: black;
 }
+
+.grammar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow-btn {
+  background: #eee;
+  color: #222;
+  padding: 6px 10px;
+  font-size: 16px;
+}
+
+.grammar-detail {
+  margin-top: 14px;
+  border-top: 1px solid #ddd;
+  padding-top: 12px;
+}
+
+.grammar-form {
+  font-size: 14px;
+  margin-top: 6px;
+  color: #555;
+}
+
+.grammar-example-kr {
+  font-size: 15px;
+  margin-top: 6px;
+}
+
+.grammar-title {
+  text-align: left;
+  margin-bottom: 6px;
+}
+
+.grammar-meaning {
+  text-align: left;
+  margin-top: 0;
+}
+
+.grammar-top > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
