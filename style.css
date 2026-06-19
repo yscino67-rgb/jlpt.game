@@ -377,3 +377,13 @@ button {
   flex-direction: column;
   gap: 4px;
 }
+
+.locked-word {
+  background-color: #bdbdbd !important;
+  color: #555 !important;
+  opacity: 0.75;
+}
+
+.locked-word * {
+  color: #555 !important;
+}
