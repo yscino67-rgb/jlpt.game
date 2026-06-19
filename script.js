@@ -15,6 +15,8 @@ const info = document.getElementById("info");
 
 let wordStates = {};
 let grammarStates = {};
+let lockedWords = JSON.parse(localStorage.getItem("lockedWords")) || {};
+let pressTimer = null;
 
 function showWordList() {
   wordList.innerHTML = "";
@@ -22,12 +24,42 @@ function showWordList() {
   words.forEach((word) => {
     const div = document.createElement("div");
     div.className = "word-item";
-    div.onclick = () => cycleColor(word.kanji, div);
+    div.onclick = () => {
+  if (lockedWords[word.kanji]) return;
+  cycleColor(word.kanji, div);
+};
+
+div.onmousedown = () => {
+  pressTimer = setTimeout(() => {
+    toggleLockWord(word.kanji, div);
+  }, 700);
+};
+
+div.onmouseup = () => {
+  clearTimeout(pressTimer);
+};
+
+div.onmouseleave = () => {
+  clearTimeout(pressTimer);
+};
+
+div.ontouchstart = () => {
+  pressTimer = setTimeout(() => {
+    toggleLockWord(word.kanji, div);
+  }, 700);
+};
+
+div.ontouchend = () => {
+  clearTimeout(pressTimer);
+};
 
     const state = wordStates[word.kanji] || 0;
     if (state === 1) div.classList.add("state-green");
     if (state === 2) div.classList.add("state-blue");
     if (state === 3) div.classList.add("state-red");
+    if (lockedWords[word.kanji]) {
+  div.classList.add("locked-word");
+}
 
     div.innerHTML = `
       <div class="word-kanji">${word.kanji}</div>
@@ -50,6 +82,18 @@ function cycleColor(wordKey, div) {
   if (next === 1) div.classList.add("state-green");
   if (next === 2) div.classList.add("state-blue");
   if (next === 3) div.classList.add("state-red");
+}
+
+function toggleLockWord(wordKey, div) {
+  lockedWords[wordKey] = !lockedWords[wordKey];
+
+  if (lockedWords[wordKey]) {
+    div.classList.add("locked-word");
+  } else {
+    div.classList.remove("locked-word");
+  }
+
+  localStorage.setItem("lockedWords", JSON.stringify(lockedWords));
 }
 
 function showWordPage() {
@@ -148,6 +192,7 @@ function startGame(mode = currentMode) {
 
 selectedWords = words
   .filter(word => wordStates[word.kanji] !== 3)
+  .filter(word => !lockedWords[word.kanji])
   .sort(() => Math.random() - 0.5)
   .slice(0, 6);
 
